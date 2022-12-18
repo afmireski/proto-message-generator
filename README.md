@@ -1,2 +1,2 @@
 # proto-message-generator
-Read typescript DTOs and generate .proto messages
+Read `typescript` DTOs and generate `.proto` messages
