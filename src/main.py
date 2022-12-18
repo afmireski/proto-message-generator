@@ -9,12 +9,28 @@ def read_path(msg: str, is_input: bool = False) -> str:
     return path
 
 
+def read_files(input_path, output_path):
+    input_file = open(input_path, 'r')
+
+    try:
+        output_file = open(output_path, 'a')
+    except FileNotFoundError:
+        output_file = open(output_path, 'w')
+
+    return input_file, output_file
+
+
 def main():
     input_path: str = read_path('Informe o caminho da entrada:', True)
     output_path: str = read_path('Informe o caminho da saída:')
 
-    print(f'Input: {input_path}')
-    print(f'Output: {output_path}')
+    # print(f'Input: {input_path}')
+    # print(f'Output: {output_path}')
+
+    input_file, output_file = read_files(input_path, output_path)
+
+    input_file.close()
+    output_file.close()
 
 
 main()
