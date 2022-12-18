@@ -24,9 +24,6 @@ def main():
     input_path: str = read_path('Informe o caminho da entrada:', True)
     output_path: str = read_path('Informe o caminho da saída:')
 
-    # print(f'Input: {input_path}')
-    # print(f'Output: {output_path}')
-
     input_file, output_file = read_files(input_path, output_path)
 
     input_file.close()
