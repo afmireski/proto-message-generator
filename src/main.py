@@ -5,6 +5,8 @@ def read_path(msg: str, is_input: bool = False) -> str:
         raise IOError('O caminho não pode estar vazio')
     elif is_input and not path.__contains__('.ts'):
         raise IOError('Arquivos de entrada devem ser .ts')
+    elif not is_input and not path.__contains__('.proto'):
+        raise IOError('Arquivos de saída devem ser .proto')
 
     return path
 
