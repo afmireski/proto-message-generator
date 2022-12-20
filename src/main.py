@@ -1,3 +1,7 @@
+from src.dtos.message_variables import MessageVariable
+from src.dtos.proto_message import ProtoMessage
+
+
 def read_path(msg: str, is_input: bool = False) -> str:
     path: str = str(input(f'{msg}\n>'))
 
