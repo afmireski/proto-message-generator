@@ -49,7 +49,24 @@ def generate_proto_message(input_file) -> ProtoMessage:
 
             i += 1
 
+    if len(message.name) == 0:
+        raise ValueError('Não foi identificada nenhuma classe')
+    if len(message.variables) == 0:
+        raise ValueError('Não foi identificada nenhuma variável')
+
     return message
+
+
+def write_message(file, message: ProtoMessage):
+    file.write(f'message {message.name} ' + '{')
+    for var in message.variables:
+        line: str = f'{var.var_type} {var.name} = {var.index};'
+        if var.is_array:
+            line = f'repeated {line}'
+        line = f'\t{line}'
+
+        file.write(line)
+    file.write('}\n')
 
 
 def main():
@@ -58,10 +75,12 @@ def main():
 
     input_file, output_file = read_files(input_path, output_path)
 
-    message: ProtoMessage = generate_proto_message(input_file)
-
-    input_file.close()
-    output_file.close()
+    try:
+        message: ProtoMessage = generate_proto_message(input_file)
+        write_message(output_file, message)
+    finally:
+        input_file.close()
+        output_file.close()
 
 
 main()
