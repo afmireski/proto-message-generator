@@ -15,7 +15,7 @@ def read_path(msg: str, is_input: bool = False) -> str:
     return path
 
 
-def read_files(input_path, output_path):
+def read_files(input_path: str, output_path: str):
     input_file = open(input_path, 'r')
 
     try:
@@ -26,11 +26,39 @@ def read_files(input_path, output_path):
     return input_file, output_file
 
 
+def generate_proto_message(input_file) -> ProtoMessage:
+    message: ProtoMessage = ProtoMessage()
+    i: int = 1
+
+    lines = input_file.readlines()
+    for line in lines:
+        if line.__contains__('class') and line.__contains__('{'):
+            temp = line.strip().split()
+
+            class_index = temp.index('class')
+            message = ProtoMessage(temp[class_index+1])
+        elif not line.__contains__('import') and line.__contains__(':') and line.__contains__(';'):
+            temp = line.strip(' ;\n').replace(':', '').replace('?', '').split()
+
+            is_array = temp[1].__contains__('[]')
+            temp[1] = temp[1].replace('[]', '')
+
+            var: MessageVariable = MessageVariable(temp[1], temp[0], i, is_array)
+
+            message.variables.append(var)
+
+            i += 1
+
+    return message
+
+
 def main():
     input_path: str = read_path('Informe o caminho da entrada:', True)
     output_path: str = read_path('Informe o caminho da saída:')
 
     input_file, output_file = read_files(input_path, output_path)
+
+    message: ProtoMessage = generate_proto_message(input_file)
 
     input_file.close()
     output_file.close()
