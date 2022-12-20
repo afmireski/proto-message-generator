@@ -7,7 +7,7 @@ class MessageVariable:
 
     @staticmethod
     def convert_type(var_type: str) -> str:
-        if var_type == 'string' or var_type.lower().__contains__('enum'):
+        if var_type == 'string' or var_type == 'Date' or var_type.lower().__contains__('enum'):
             return 'string'
         elif var_type == 'number':
             return 'int32'

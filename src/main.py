@@ -37,6 +37,11 @@ def generate_proto_message(input_file) -> ProtoMessage:
 
             class_index = temp.index('class')
             message = ProtoMessage(temp[class_index+1])
+        elif line.__contains__('interface') and line.__contains__('{'):
+            temp = line.strip().split()
+
+            class_index = temp.index('interface')
+            message = ProtoMessage(temp[class_index+1])
         elif not line.__contains__('import') and line.__contains__(':') and line.__contains__(';'):
             temp = line.strip(' ;\n').replace(':', '').replace('?', '').split()
 
@@ -58,9 +63,9 @@ def generate_proto_message(input_file) -> ProtoMessage:
 
 
 def write_message(file, message: ProtoMessage):
-    file.write(f'message {message.name} ' + '{')
+    file.write(f'\nmessage {message.name} ' + '{\n')
     for var in message.variables:
-        line: str = f'{var.var_type} {var.name} = {var.index};'
+        line: str = f'{var.var_type} {var.name} = {var.index};\n'
         if var.is_array:
             line = f'repeated {line}'
         line = f'\t{line}'

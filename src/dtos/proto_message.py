@@ -6,9 +6,9 @@ class ProtoMessage:
     @staticmethod
     def convert_name(name: str) -> str:
         if name.__contains__("Input"):
-            name.replace("Input", "Request")
+            name = name.replace("Input", "Request")
         elif name.__contains__("Output"):
-            name.replace("Output", "Response")
+            name = name.replace("Output", "Response")
         return name
 
     def __str__(self):
