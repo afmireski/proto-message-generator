@@ -16,3 +16,5 @@ class MessageVariable:
         else:
             return var_type
 
+    def __str__(self):
+        return f'{self.var_type}|{self.name}|{self.index}|{self.is_array}'
