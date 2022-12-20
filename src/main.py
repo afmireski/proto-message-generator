@@ -32,9 +32,6 @@ def main():
 
     input_file, output_file = read_files(input_path, output_path)
 
-    teste: ProtoMessage = ProtoMessage('TesteInput')
-    teste.variables.append(MessageVariable('number', 'var1', 1))
-
     input_file.close()
     output_file.close()
 
