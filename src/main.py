@@ -26,24 +26,40 @@ def read_files(input_path: str, output_path: str):
     return input_file, output_file
 
 
+def remove_unnecessary_chars(string: str) -> str:
+    return string.strip(' ;\n').replace(':', '').replace('?', '').replace('!', '')
+
+
+def is_class(line: str) -> bool:
+    return line.__contains__('class') and line.__contains__('{')
+
+
+def is_interface(line: str) -> bool:
+    return line.__contains__('interface') and line.__contains__('{')
+
+
+def is_var(line: str) -> bool:
+    return not line.__contains__('import') and line.__contains__(':') and line.__contains__(';')
+
+
 def generate_proto_message(input_file) -> ProtoMessage:
     message: ProtoMessage = ProtoMessage()
     i: int = 1
 
     lines = input_file.readlines()
     for line in lines:
-        if line.__contains__('class') and line.__contains__('{'):
+        if is_class(line):
             temp = line.strip().split()
 
             class_index = temp.index('class')
             message = ProtoMessage(temp[class_index+1])
-        elif line.__contains__('interface') and line.__contains__('{'):
+        elif is_interface(line):
             temp = line.strip().split()
 
             class_index = temp.index('interface')
             message = ProtoMessage(temp[class_index+1])
-        elif not line.__contains__('import') and line.__contains__(':') and line.__contains__(';'):
-            temp = line.strip(' ;\n').replace(':', '').replace('?', '').split()
+        elif is_var(line):
+            temp = remove_unnecessary_chars(line).split()
 
             is_array = temp[1].__contains__('[]')
             temp[1] = temp[1].replace('[]', '')
