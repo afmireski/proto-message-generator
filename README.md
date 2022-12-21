@@ -1,8 +1,8 @@
 # proto-message-generator
-Read `typescript` DTOs and generate `.proto` messages
+Lê DTOs em `typescript` e gera `messages` equivalentes em arquivos `.proto`
 
 
-## Run Instrucions: Informe o caminho da entrada:
+## Instruções de execução:
 1. Faça o `download`, ou `clone` o projeto
 2. Execute o projeto
 3. Copie o `caminho absoluto` do seu arquivo `.ts`
