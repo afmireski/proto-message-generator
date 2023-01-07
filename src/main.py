@@ -1,5 +1,5 @@
-from src.dtos.message_variables import MessageVariable
-from src.dtos.proto_message import ProtoMessage
+from dtos.proto_message import ProtoMessage
+from dtos.message_variables import MessageVariable
 
 
 def read_path(msg: str, is_input: bool = False) -> str:
@@ -31,11 +31,11 @@ def remove_unnecessary_chars(string: str) -> str:
 
 
 def is_class(line: str) -> bool:
-    return line.__contains__('class') and line.__contains__('{')
+    return not line.__contains__('import') and line.__contains__('class') and line.__contains__('{')
 
 
 def is_interface(line: str) -> bool:
-    return line.__contains__('interface') and line.__contains__('{')
+    return not line.__contains__('import') and line.__contains__('interface') and line.__contains__('{')
 
 
 def is_var(line: str) -> bool:
