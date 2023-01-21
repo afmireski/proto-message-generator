@@ -3,10 +3,27 @@ Lê DTOs em `typescript` e gera `messages` equivalentes em arquivos `.proto`
 
 
 ## Instruções de execução:
-1. Faça o `download`, ou `clone` o projeto
-2. Execute o projeto
-3. Copie o `caminho absoluto` do seu arquivo `.ts`
-4. Informe-o aqui `Informe o caminho da entrada: > path`
-5. Copie o `caminho absoluto` do seu arquivo `.proto`. Se ele ainda não existir será criado depois.
-6. Informe-o aqui `Informe o caminho da saída: > path`
-7. Se tudo estiver correto a `message` equivalente ao `DTO` informado será gerada.
+
+### CLI
+```zsh
+    # Clone o projeto
+    git clone https://github.com/afmireski/proto-message-generator.git
+    
+    # Vá até o /src
+    cd proto-message-generator/src
+    
+    # Execute o main.py
+    python ./main.py
+    
+    # Primeiro informe o caminho do arquivo .ts
+    Informe o caminho da entrada:    
+    > absolute_path/file.ts
+        
+    # Depois informe o caminho do arquivo .proto
+    # Se ele não existir será criado
+    Informe o caminho da saída:    
+    > absolute_path/file.proto
+
+```
+    
+
