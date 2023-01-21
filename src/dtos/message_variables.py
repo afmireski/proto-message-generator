@@ -1,9 +1,21 @@
 class MessageVariable:
-    def __init__(self, var_type: str, name: str, index: int, is_array: bool = False):
-        self.var_type = self.__convert_type(var_type)
+    def __init__(self, var_type: str, name: str, index: int):
+        self.__get_var_type(var_type)
         self.name = name
         self.index = index
-        self.is_array = is_array
+
+    @staticmethod
+    def contains_array_keywords(var_type: str):
+        return var_type.__contains__('[]') or var_type.__contains__('Array<')
+
+    @staticmethod
+    def remove_array_keywords(var_type: str):
+        return var_type.replace('[]', '').replace('Array<', '').replace('>', '')
+
+    def __get_var_type(self, var_type: str):
+        self.is_array = self.contains_array_keywords(var_type)
+        var_type = self.remove_array_keywords(var_type)
+        self.var_type = self.__convert_type(var_type)
 
     @staticmethod
     def __should_be_string(var_type: str) -> bool:
