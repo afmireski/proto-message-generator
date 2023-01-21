@@ -51,20 +51,17 @@ def generate_proto_message(input_file) -> ProtoMessage:
         if is_class(line):
             temp = line.strip().split()
 
-            class_index = temp.index('class')
-            message = ProtoMessage(temp[class_index+1])
+            keyword_index = temp.index('class')
+            message = ProtoMessage(temp[keyword_index+1])
         elif is_interface(line):
             temp = line.strip().split()
 
-            class_index = temp.index('interface')
-            message = ProtoMessage(temp[class_index+1])
+            keyword_index = temp.index('interface')
+            message = ProtoMessage(temp[keyword_index+1])
         elif is_var(line):
             temp = remove_unnecessary_chars(line).split()
 
-            is_array = temp[1].__contains__('[]')
-            temp[1] = temp[1].replace('[]', '')
-
-            var: MessageVariable = MessageVariable(temp[1], temp[0], i, is_array)
+            var: MessageVariable = MessageVariable(temp[1], temp[0], i)
 
             message.variables.append(var)
 
