@@ -20,7 +20,7 @@ class MessageVariable:
     @staticmethod
     def __should_be_string(var_type: str) -> bool:
         return var_type == 'string' or var_type == 'Date' or var_type.lower().__contains__('enum') \
-            or var_type.lower().__contains__('keyof typeof')
+            or var_type.lower().__contains__('keyof') or var_type.lower().__contains__('typeof')
 
     def __convert_type(self, var_type: str) -> str:
         if self.__should_be_string(var_type):
